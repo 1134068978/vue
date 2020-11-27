@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>08_表单输入的绑定</title>
+</head>
+<body>
+<!--
+使用v-model（双向数据绑定）自动收集数据
+text/textarea
+checkbox
+radio
+select
+-->
+<div id="demo">
+    <form action="/xxx">
+        <span>用户名：</span>
+        <input type="text" v-model="username"><br>
+        <span>密码：</span>
+        <input type="password" v-model="password"><br>
+        <span>性别：</span>
+        <input type="radio" id="female" v-model="sex" value="女">
+        <label for="female">女</label>
+        <input type="radio" id="male" v-model="sex" value="男">
+        <label for="male">男</label>
+        <br>
+        <span>爱好：</span>
+        <input type="checkbox" id="basket" value="basket" v-model="likes">
+        <label for="basket">篮球</label>
+        <input type="checkbox" id="football" value="football" v-model="likes">
+        <label for="football">足球</label>
+        <input type="checkbox" id="tennis" value="tennis" v-model="likes">
+        <label for="tennis">乒乓</label>
+        <br>
+        <span>城市：</span>
+        <select v-model="myCity">
+            <option value="">未选择</option>
+            <option :value="city.id" v-for="(city,index) in allCitys" :key="city.id">{{city.name}}</option>
+        </select>
+        <br>
+        <input type="submit" @click.prevent="handleSubmit" value="注册">
+    </form>
+</div>
+</body>
+</html>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script>
+    new Vue({
+        el: "#demo",
+        data: {
+            username:'feng',
+            password:'123456',
+            sex: "男",
+            likes:['basket', 'tennis'],
+            allCitys: [{id: 1, name: "BJ"}, {id: 2, name: "SH"}, {id: 3, name: "GD"}],
+            myCity: 1
+        },
+        methods:{
+            handleSubmit(){
+                console.log(this.username, this.password, this.sex, this.likes, this.allCitys, this.myCity)
+            }
+        }
+    })
+</script>
